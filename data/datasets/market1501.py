@@ -27,6 +27,7 @@ class Market1501(BaseImageDataset):
 
     def __init__(self, root='/mnt/lustre/renjiawei/data', verbose=True, **kwargs):
         super(Market1501, self).__init__()
+        root = '/mnt/lustre/renjiawei/data'
         self.dataset_dir = osp.join(root, self.dataset_dir)
         self.train_dir = osp.join(self.dataset_dir, 'bounding_box_train')
         self.query_dir = osp.join(self.dataset_dir, 'query')
