@@ -30,7 +30,9 @@ def create_supervised_trainer(model, optimizer, loss_fn,
         Engine: a trainer engine with supervised update function
     """
     if device:
-        model.to(device)
+        # model.to(device)
+        from torch import nn
+        model = nn.DataParallel(model).cuda()
 
     def _update(engine, batch):
         model.train()

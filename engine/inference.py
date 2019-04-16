@@ -25,7 +25,8 @@ def create_supervised_evaluator(model, metrics,
         Engine: an evaluator engine with supervised inference function
     """
     if device:
-        model.to(device)
+        from torch import nn
+        model = nn.DataParallel(model).cuda()
 
     def _inference(engine, batch):
         model.eval()
