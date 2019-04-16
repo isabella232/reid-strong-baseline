@@ -67,7 +67,9 @@ def create_supervised_trainer_with_center(model, center_criterion, optimizer, op
         Engine: a trainer engine with supervised update function
     """
     if device:
-        model.to(device)
+        # model.to(device)
+        from torch import nn
+        model = nn.DataParallel(model).cuda()
 
     def _update(engine, batch):
         model.train()
@@ -106,7 +108,9 @@ def create_supervised_evaluator(model, metrics,
         Engine: an evaluator engine with supervised inference function
     """
     if device:
-        model.to(device)
+        # model.to(device)
+        from torch import nn
+        model = nn.DataParallel(model).cuda()
 
     def _inference(engine, batch):
         model.eval()
